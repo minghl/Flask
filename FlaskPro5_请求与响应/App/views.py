@@ -1,5 +1,5 @@
 # views.py: 路由+视图函数
-from flask import Blueprint, request
+from flask import Blueprint, request, render_template, jsonify, make_response, Response
 from .models import *
 
 # 蓝图:先声明，还没有创建app
@@ -51,3 +51,27 @@ def get_request():
 
     return 'request ok!'
 
+# Response: 服务器端想客户端发送的响应
+@blue.route('/response/')
+def get_response():
+    pass
+    # 响应的几种方式
+    # 1. 返回字符串（不常用）
+    # return 'response OK!'
+
+    # 2. 模版渲染（前后端不分离）
+    # return  render_template('index.html', name='张三', age=33)
+
+    # 3. 返回json数据（前后端分离）
+    data = {'name':'李四','age':44}
+    # return data
+
+    # jsonify()：序列化，字典=>字符串
+    # return jsonify(data)
+
+    # 4. 自定义Response对象
+    html = render_template('index.html', name='张三', age=33)
+    print(html, type(html)) #<class 'str'>
+    # res = make_response(html, 200)
+    res = Response(html)
+    return res
