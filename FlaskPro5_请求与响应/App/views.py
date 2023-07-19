@@ -1,5 +1,5 @@
 # views.py: 路由+视图函数
-from flask import Blueprint, request, render_template, jsonify, make_response, Response
+from flask import Blueprint, request, render_template, jsonify, make_response, Response, redirect, url_for
 from .models import *
 
 # 蓝图:先声明，还没有创建app
@@ -72,6 +72,25 @@ def get_response():
     # 4. 自定义Response对象
     html = render_template('index.html', name='张三', age=33)
     print(html, type(html)) #<class 'str'>
+
     # res = make_response(html, 200)
     res = Response(html)
     return res
+
+# Redirect: 重定向
+@blue.route('/redirect/')
+def make_redirect():
+    pass
+    # 重定向的几种方式
+    # return redirect('https://www.qq.com')
+    # return redirect('/response/')
+
+    # url_for():反向解析，通过视图函数名反过来找到路由
+    # url_for('蓝图名称.视图函数名')
+    # ret = url_for('user.get_response')
+    # print('ret:',ret)
+    # return redirect(ret)
+
+    # url_for传参
+    ret2 = url_for('user.get_request',name='王五',age=66)
+    return redirect(ret2)
