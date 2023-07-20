@@ -9,9 +9,10 @@ def home():
     pass
 
     data  = {
-        'name':'ikun',
+        'name':'ikun ikun ikun',
         'age':26,
         'likes':['ball','sing','dance','code']
     }
-    return render_template('home.html', **data)
+    # return render_template('home.html', **data)
 
+    return  render_template('child2.html', **data)
