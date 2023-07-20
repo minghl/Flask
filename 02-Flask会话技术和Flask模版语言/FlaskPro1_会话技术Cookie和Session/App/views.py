@@ -1,7 +1,7 @@
 # views.py: 路由+视图函数
 import datetime
 
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from .models import *
 
 # 蓝图:先声明，还没有创建app
@@ -12,7 +12,10 @@ blue = Blueprint('user',__name__)
 @blue.route('/home/')
 def home():
     # 4. 获取cookie, 设置cookie时的名字
-    username = request.cookies.get('user')
+    # username = request.cookies.get('user')
+
+    # 获取 session
+    username = session.get('user')
     return render_template('home.html', username = username)
 
 # 登录
@@ -40,7 +43,11 @@ def login():
             #   max_age:秒
             #   expires:指定的datetime日期
             # response.set_cookie('user', username, max_age=3600*24*7)
-            response.set_cookie('user', username, expires=datetime.datetime(2023, 12, 12))
+            # response.set_cookie('user', username, expires=datetime.datetime(2023, 12, 12))
+
+            # 设置session
+            session['user'] = username
+            session.permanent = True
 
             return response
         else:
@@ -54,4 +61,7 @@ def logout():
     # 5. 删除cookie
     response.delete_cookie('user')
 
+    # 删除session
+    session.pop('user')
+    # session.clear() # 慎用，会删除服务器下的所有session
     return response
