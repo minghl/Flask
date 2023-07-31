@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sqlite3" uuid="8a589050-9373-49f3-880b-80e74e4fe3cd">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="flaskdb@localhost" uuid="6f060248-97c2-4097-8c5f-a8babd2b9aab">
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/03-Flask模型/FlaskPro1_模型基础/instance/sqlite3.db</jdbc-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/flaskdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

@@ -11,8 +11,8 @@ def create_app():
     app.register_blueprint(blueprint=blue)
 
     # 配置数据库
-    db_uri = 'sqlite:///sqlite3.db'
-    # db_uri = 'mysql+pymysql://root:123456@localhost:3306/flaskdb' # mysql 的配置·
+    # db_uri = 'sqlite:///sqlite3.db'
+    db_uri = 'mysql+pymysql://root:liminghao1998@127.0.0.1:3306/flaskdb' # mysql 的配置·
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri  # 配置连接数据库路径DB_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 禁止对象追踪修改
 
