@@ -9,6 +9,8 @@ from .exts import db
 
 # 模型Model：类
 # 必须继承db.Model
+# 改模型，直接改这里
+# 模型一旦改掉，就需要重新迁移
 class User(db.Model):
     # 表名
     __tablename__ = 'tb_user'
@@ -18,7 +20,7 @@ class User(db.Model):
     age = db.Column(db.Integer, default=1)
     sex = db.Column(db.Boolean, default=True)
     salary = db.Column(db.Float, default=100000, nullable=False)
-
+    salary2 = db.Column(db.Float, default=100000, nullable=False)
 # db.Column: 表示字段
 # db.Integer: 表示整数
 # primary_key = True: 主键

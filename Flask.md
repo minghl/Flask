@@ -206,3 +206,71 @@ marco【了解】
 
 ## 06 Model
 
+### 01 数据迁移
+
+1. 安装好数据迁移的包 flask-sqlalchemy和flask-migrate
+
+2. 在exts.py中初始化Migrate和SQLAlchemy
+
+3. 在models中定义好模型
+
+4. 在views.py中一定要导入models模块
+
+   from .models import *
+
+5. 配置好数据库（sqlite3或MySQL）
+
+6. 执行数据迁移命令：
+
+   1. 先在cmd或Terminal进入项目目录（app.py所在目录）：
+
+   2. 然后输入命令：
+
+      flask db init 创建迁移文件夹migrates，只调用一次
+
+      flask db migrate 生成迁移文件
+
+      flask db upgrade 执行迁移文件中的升级
+
+      flask db downgrade 执行迁移文件中的降级
+
+数据筒単操作
+	创建数据库，表
+		db.create_al1()
+	删除表
+		db.drop_all()
+	在事务中外理，数据插入
+		db.session.add(object)
+		db.session.commit ()
+	获取所有数据
+		Person. query. all ()
+
+### 02 模型操作
+
+#### 创建模型
+
+```python
+class User(db.Model):
+    # 表名
+    __tablename__ = 'tb_user'
+    # 定义表字段
+    id = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    name = db.Column(db.String(30), unique = True, index = True)
+    age = db.Column(db.Integer, default=1)
+    sex = db.Column(db.Boolean, default=True)
+    salary = db.Column(db.Float, default=100000, nullable=False)
+    salary2 = db.Column(db.Float, default=100000, nullable=False)
+```
+
+##### 字段类型
+
+<img src="/Users/liminghao/Library/Application Support/typora-user-images/Screenshot 2023-07-31 at 13.00.35.png" alt="Screenshot 2023-07-31 at 13.00.35" style="zoom:33%;float:left;"/>
+
+##### 常用约束
+
+![Screenshot 2023-07-31 at 13.03.37](/Users/liminghao/Library/Application Support/typora-user-images/Screenshot 2023-07-31 at 13.03.37.png)
+
+#### 模型操作
+
+##### 单表操作
+
