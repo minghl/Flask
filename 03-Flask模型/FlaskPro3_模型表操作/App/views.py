@@ -1,5 +1,7 @@
 # views.py: 路由+视图函数
 from flask import Blueprint
+from sqlalchemy import desc, and_, not_, or_
+
 from .models import *
 
 # 蓝图:先声明，还没有创建app
@@ -59,3 +61,75 @@ def user_update():
     db.session.commit()
 
     return 'success!'
+
+# 查：查询数据
+#   条件
+@blue.route('/userget/')
+def user_get():
+    # all(): 返回所有数据，返回列表
+    users = User.query.all()
+    # print(users)
+    # print(users, type(users)) # <class 'list'>
+    # print(User.query, type(User.query)) # <class 'flask_sqlalchemy.query.Query'>
+
+    # filter(): 过滤，得到查询集，类似SQL中的where
+    users = User.query.filter().filter() # 可以继续操作
+    # print(users, type(users)) # 查询集
+    # print(list(users)) # 强制转换列表
+
+    # get(): 查询到对应主键的数据对象
+    user = User.query.get(8)
+    # print(user, type(user)) # <class 'App.models.User'>
+    # print(user.name, user.age) # 获取数据的属性
+
+    # filter(): 类似SQL中的where
+    # filter_by(): 用于等值操作的过滤
+    # users = User.query.filter(User.age==20)
+    # users = User.query.filter_by(age = 20)
+    users = User.query.filter(User.age>20) # 可以用于非等值操作
+    # print(list(users))
+
+    # first(): 第一条数据
+    # first_or_404(): 第一条数据，如果不存在则抛出404错误
+    user = User.query.first()
+    # user = User.query.filter_by(age=100).first_or_404()
+    # print(user)
+
+    # count(): 统计查询集中的数据条数
+    users = User.query.filter()
+    # print(users.count()) # 20
+
+    # limit(): 前几条
+    # offset(): 跳过前几条
+    users = User.query.offset(3).limit(4)
+    # print(list(users))
+
+    # order_by(): 排序
+    users = User.query.order_by('age') # 升序
+    users = User.query.order_by(desc('age')) # 降序
+    # print(list(users))
+
+    # 逻辑运算: and_,or_,not_
+    users = User.query.filter(User.age>20, User.age<25) # 且，常用
+    users = User.query.filter(and_(User.age>20, User.age<25)) # 且
+    users = User.query.filter(or_(User.age>25, User.age<20)) # 或
+    users = User.query.filter(not_(or_(User.age>25, User.age<20))) # 非
+    # print(list(users))
+
+    # 查询属性
+    # contains('3'): 模糊查找，类似SQL中的like
+    users = User.query.filter(User.name.contains('3'))
+    # in_(): 其中之一
+    users = User.query.filter(User.age.in_([10,20,30,40,50]))
+    # startswith(): 以某子串开头
+    # endswith(): 以某子串结尾
+    users = User.query.filter(User.name.startswith('冰'))
+    users = User.query.filter(User.name.endswith('2'))
+
+    # __gt__: 大于
+    users = User.query.filter(User.age.__gt__(25))
+
+
+    print(list(users))
+
+    return 'success'
