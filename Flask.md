@@ -309,3 +309,13 @@ class User(db.Model):
 		filter(or\_条件,条件...)
 	非 not\_
 		filter(not\_(条件),条件...)
+
+##### 分页
+
+- 手动做分页
+
+  Persons = Person.query.offset((page - 1) * per_page).limit(per_page)
+
+- 使用paginate做分页
+
+  persons = Person.query.paginate(page = page, per_page = per_page, error_out = False).items
