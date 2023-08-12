@@ -319,3 +319,11 @@ class User(db.Model):
 - 使用paginate做分页
 
   persons = Person.query.paginate(page = page, per_page = per_page, error_out = False).items
+
+##### 多表操作
+
+- 多表关系
+  - 一对一   1:1   用户表:身份证表   1个用户只有一张身份证   1张身份证只对应一个用户
+  - 一对多   1:N   班级表:学生表   1个班级有多个学生   1个学生只属于一个班级 
+  - 多对多   N:M   用户表:收藏表:电影表   1个用户可以收藏多部电影   一部电影可以被多个用户收藏  （会用到中间表）
+    用户表:中间表   1:N   电影表:中间表   1:N
