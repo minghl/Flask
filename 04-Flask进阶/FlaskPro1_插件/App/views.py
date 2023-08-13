@@ -59,3 +59,8 @@ def before():
 
     print(current_app) # <Flask 'App'>
     print(current_app.config) # <Config {'DEBUG': True, 'TESTING': False, 'PROPAGATE...
+
+# static和templates
+@blue.route('/templates/')
+def templates():
+    return render_template('template.html')
