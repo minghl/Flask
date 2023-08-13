@@ -355,3 +355,10 @@ request: 请求对象，可以获取客户端提交过来的所有请求信息
 session: 会话技术，服务端会话技术的接口
 
 current_app: app的配置信息，app对象获取，current_app; 使用获取当前app需要注意，一定要在程序初始化完成之后	
+
+### Flask RESTful
+
+#### 字段格式化
+
+Fields
+
