@@ -344,4 +344,14 @@ class User(db.Model):
 	before_first_request: 处理第一次请求之前执行
 	before_request: 在每次请求之前执行，通常使用这个钩子函数预处理一些变量，实现反爬等
 	after_request: 注册一个函数，如果没有未处理的异常抛出，在每次请求之后运行
-	teardown_appcontext: 当APP上下文被移除之后执行的函数，可以进行数据库的提交或者回滚	
+	teardown_appcontext: 当APP上下文被移除之后执行的函数，可以进行数据库的提交或者回滚
+
+#### Flask内置对象
+
+g: global全局对象；是用来专门保存用户数据的；在一次请求中的所有的代码的地方，都是可以使用的；突破变量存储位置限制，为数据传递添加了新的方式，比如我们在before_request产生一个数据在后面需要使用，可以保存在g对象中，在其他视图函数中就可以使用这个函数
+
+request: 请求对象，可以获取客户端提交过来的所有请求信息
+
+session: 会话技术，服务端会话技术的接口
+
+current_app: app的配置信息，app对象获取，current_app; 使用获取当前app需要注意，一定要在程序初始化完成之后	

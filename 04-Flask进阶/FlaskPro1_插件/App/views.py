@@ -1,5 +1,5 @@
 # views.py: 路由+视图函数
-from flask import Blueprint,request,render_template
+from flask import Blueprint,request,render_template,g, current_app
 from .models import *
 from .exts import cache
 import time
@@ -13,6 +13,7 @@ blue = Blueprint('user',__name__)
 def index():
     print('Index2')
 
+    print('Index视图函数中：',g.star)
     time.sleep(5)
     return 'Index2'
 
@@ -46,3 +47,15 @@ def before():
     else:
     # 对每个IP设置一个缓存，1s内不让重复访问
         cache.set(ip, 'value', timeout=1)
+
+    # Flask内置对象
+    #   request
+    #   session
+    #   g: global全局对象
+    #   current_app: Flask应用对象
+
+    g.star = '杰伦'
+    print(g.star)
+
+    print(current_app) # <Flask 'App'>
+    print(current_app.config) # <Config {'DEBUG': True, 'TESTING': False, 'PROPAGATE...
