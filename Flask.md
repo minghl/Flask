@@ -334,3 +334,14 @@ class User(db.Model):
 
 #### Flask-caching
 
+给视图函数加一个缓存20秒（20秒之后才会重新sleep5秒）
+
+#### 钩子（中间件middleware）
+
+钩子或者钩子函数，是指在执行函数和目标函数之间挂载的函数，框架开发者给调用方提供一个point-挂载点，是一种AOP切面编程思想
+
+常用的钩子函数：
+	before_first_request: 处理第一次请求之前执行
+	before_request: 在每次请求之前执行，通常使用这个钩子函数预处理一些变量，实现反爬等
+	after_request: 注册一个函数，如果没有未处理的异常抛出，在每次请求之后运行
+	teardown_appcontext: 当APP上下文被移除之后执行的函数，可以进行数据库的提交或者回滚	
